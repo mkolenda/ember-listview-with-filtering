@@ -73,7 +73,12 @@ App.DataIndexRoute = Ember.Route.extend({
             [
                 Ember.Object.create({id: 1, name: 'row 1'}),
                 Ember.Object.create({id: 2, name: 'row 2'}),
-                Ember.Object.create({id: 3, name: 'row 3'})
+                Ember.Object.create({id: 3, name: 'row 3'}),
+                Ember.Object.create({id: 4, name: 'row 4'}),
+                Ember.Object.create({id: 5, name: 'row 5'}),
+                Ember.Object.create({id: 6, name: 'row 6'}),
+                Ember.Object.create({id: 7, name: 'row 7'}),
+                Ember.Object.create({id: 8, name: 'row 8'})
             ]);
     },
 
@@ -146,7 +151,7 @@ App.RowController = Ember.ObjectController.extend({
 });
 
 
-App.DataIndexView = Ember.CollectionView.extend({
+App.DataIndexView = Ember.ListView.extend({
                                         // We are forced to use a collectionView instead of #each in the data view
                                         // because the ItemView library descends from collectionView
     tagName: 'ul',
@@ -155,8 +160,8 @@ App.DataIndexView = Ember.CollectionView.extend({
                                         //  - Shows how to use a property for the content of a itemViewClass
                                         // http://jsbin.com/rujixexege/1/edit
                                         //  - Shows how to pass a controller and content to the view in itemViewClass
-    height: 100,
-    rowHeight: 50,
+    height: 400,
+    rowHeight: 200,
     classNames: ['parent-view'],
 //    this worked without the contentBinding above, except the itemController did not set the controller for the row views
 //    content: function(){
@@ -166,7 +171,7 @@ App.DataIndexView = Ember.CollectionView.extend({
     itemViewClass: 'row'                // This is equivalent to the doctor-details view/template
 });
 
-App.RowView = Ember.View.extend({
+App.RowView = Ember.ListItemView.extend({
     controllerBinding: 'content',
     templateName: 'row',
     classNames: ['row-class'],
