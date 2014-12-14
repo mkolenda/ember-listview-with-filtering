@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Collection View</title>
+    <script src="http://code.jquery.com/jquery-2.0.2.js"></script>
+    <script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.1.2.js">  </script>
+    <script src="http://builds.emberjs.com/release/ember.js"></script>
+    <script src="http://builds.emberjs.com/tags/v1.0.0-beta.12/ember-data.prod.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body>
+<script type="text/x-handlebars" data-template-name="application">
+    <h1>CollectionView With Item View</h1>
+    {{outlet}}
+</script>
+
+<!-- This index works with Ember.View -->
+<!--<script type="text/x-handlebars" data-template-name="index">-->
+    <!--{{#each filteredContent}}-->
+        <!--{{name}}-->
+        <!--<button {{action 'applyFilter' name}}>-->
+        <!--Filter by: {{name}}-->
+        <!--</button>-->
+        <!--<br />-->
+    <!--{{/each}}-->
+<!--</script>-->
+
+
+<!-- Ember.CollectionView this index and row go together -->
+<script type="text/x-handlebars" data-template-name="data">
+    {{input type="text" placeholder='row 1' value=filter}}
+    {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="row">
+    <p>
+        {{getName}}
+        <button {{action 'view_more' target='view'}}">
+            Set me
+        </button>
+    </p>
+    {{#each mod in arrayContent}}       <!-- HACK! Loop through a single element array to preserve the model in mod                                             so mod can be accessed in the various each loops that are in the time-summary template -->
+        {{view "time-summary"}}
+    {{/each}}
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="time-summary">
+    {{#each appointment in at_most_times}}
+                                        <!-- Now we are replicating behavior in search/time-summary template in FAD -->
+        {{#each data in appointment.times}}
+                {{#view "appointment-item"}}
+                    {{#link-to 'appointment-detail' mod.id data.appointmentid}}{{data.time}}{{/link-to}}
+                                        <!-- There is no template associated with this view-->
+                {{/view}}
+        {{/each}}
+    {{/each}}
+</script>
+
+</body>
+</html>
