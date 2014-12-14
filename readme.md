@@ -30,3 +30,5 @@ Useful links:
 * Clone the repo
 * Configure your webserver to serve the site
 * go to <whatever you named the site>/#/data/index
+* scroll and filter the list.  There are only 11 row records.
+* open firebug or chrome inspector and view the DOM, notice how list-vew creates and destroys DOM elements as they come into and out of view.
