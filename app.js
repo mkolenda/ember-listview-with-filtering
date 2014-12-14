@@ -78,7 +78,10 @@ App.DataIndexRoute = Ember.Route.extend({
                 Ember.Object.create({id: 5, name: 'row 5'}),
                 Ember.Object.create({id: 6, name: 'row 6'}),
                 Ember.Object.create({id: 7, name: 'row 7'}),
-                Ember.Object.create({id: 8, name: 'row 8'})
+                Ember.Object.create({id: 8, name: 'row 8'}),
+                Ember.Object.create({id: 7, name: 'row 9'}),
+                Ember.Object.create({id: 7, name: 'row 10'}),
+                Ember.Object.create({id: 7, name: 'row 11'})
             ]);
     },
 
@@ -106,6 +109,11 @@ App.DataIndexController = Ember.ArrayController.extend({
     filteredContent: function(){        // Do the filtering and set the content property of this controller
                                         // with the filtered content.  Have to do this for the RowView to
                                         // update with the filtered rows.  Which is a HACK!
+        Ember.run.debounce(this, this.runFilter, 250);
+                                        // debounce the function because this filter is SLOWWWWWW!
+    }.observes('filter'),               // This is observes, not a property.  It sets the content property
+
+    runFilter: function() {
         var filter = this.get('filter');
         var list = this.get('originalContent');
 
@@ -114,7 +122,7 @@ App.DataIndexController = Ember.ArrayController.extend({
         });
 
         this.set('content', filtered)
-    }.observes('filter')                // This is observes, not a property.  It sets the content property
+    }
 
 });
 

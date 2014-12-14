@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta charset=utf-8 />
-    <title>Collection View</title>
+    <title>Ember ListItem with Filtering</title>
     <script src="jquery.js"></script>
     <script src="handlebars.js"></script>
     <script src="ember.js"></script>
     <script src="http://builds.emberjs.com/tags/v1.0.0-beta.12/ember-data.prod.js"></script>
 
-    <script src="list-view-from-site.js"></script>
+    <script src="list-view-latest.min.js"></script>
     <script src="app.js"></script>
 
     <link rel="stylesheet" href="styles.css">
@@ -16,7 +16,7 @@
 
 <body>
 <script type="text/x-handlebars" data-template-name="application">
-    <h1>CollectionView With Item View</h1>
+    <h1>Ember ListItem with Filtering</h1>
     {{outlet}}
 </script>
 
@@ -41,7 +41,7 @@
 <script type="text/x-handlebars" data-template-name="row">
     <p>
         {{getName}}
-        <button {{action 'view_more' target='view'}}">
+        <button {{action 'view_more' target='view'}}"> <!-- This is similar to the action call on the doctor-details template -->
             Set me
         </button>
     </p>
