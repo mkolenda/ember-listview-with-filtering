@@ -16,23 +16,10 @@
 
 <body>
 <script type="text/x-handlebars" data-template-name="application">
-    <h1>Ember ListItem with Filtering</h1>
+    <h1>Ember ListView with Filtering</h1>
     {{outlet}}
 </script>
 
-<!-- This index works with Ember.View -->
-<!--<script type="text/x-handlebars" data-template-name="index">-->
-    <!--{{#each filteredContent}}-->
-        <!--{{name}}-->
-        <!--<button {{action 'applyFilter' name}}>-->
-        <!--Filter by: {{name}}-->
-        <!--</button>-->
-        <!--<br />-->
-    <!--{{/each}}-->
-<!--</script>-->
-
-
-<!-- Ember.CollectionView this index and row go together -->
 <script type="text/x-handlebars" data-template-name="data">
     {{input type="text" placeholder='row 1' value=filter}}
     {{outlet}}
@@ -40,12 +27,15 @@
 
 <script type="text/x-handlebars" data-template-name="row">
     <p>
-        {{getName}}
-        <button {{action 'view_more' target='view'}}"> <!-- This is similar to the action call on the doctor-details template -->
-            Set me
+        {{getName}}                     <!-- Get the name of the model from the controller -->
+        <button {{action 'set' target='view'}}">
+                                        <!-- Targeting the view for this action.
+                                        This is similar to the action call on the doctor-details template -->
+            Set the class to set
         </button>
     </p>
-    {{#each mod in arrayContent}}       <!-- HACK! Loop through a single element array to preserve the model in mod                                             so mod can be accessed in the various each loops that are in the time-summary template -->
+    {{#each mod in arrayContent}}       <!-- HACK! Loop through a single element array to preserve the model in mod
+                                            so mod can be accessed in the various each loops that are in the time-summary template -->
         {{view "time-summary"}}
     {{/each}}
 </script>
@@ -56,8 +46,11 @@
                                         <!-- Now we are replicating behavior in search/time-summary template in FAD -->
         {{#each data in appointment.times}}
                 {{#view "appointment-item"}}
-                    {{#link-to 'appointment-detail' mod.id data.appointmentid}}{{data.time}}{{/link-to}}
                                         <!-- There is no template associated with this view-->
+                    <p><span class="thick">Content Property:</span> {{mod.id}}
+                    <span class="thick">Controller Property:</span> {{getName}}
+                    <span class="thick">Outer Loop Attribute:</span> {{appointment.address}}
+                    <span class="thick">Inner Loop Attribute:</span> {{data.appointmentid}}</p>
                 {{/view}}
         {{/each}}
     {{/each}}

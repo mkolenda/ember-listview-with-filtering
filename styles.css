@@ -5,3 +5,7 @@
 .ember-list-item-view {
     position: absolute;
 }
+
+.thick {
+    font-weight: bold;
+}
