@@ -14,20 +14,12 @@ App.Router.map(function() {
 
 App.DataIndexRoute = Ember.Route.extend({
     model: function() {                // set the model on the dataIndex controller
-        return(
-            [
-                Ember.Object.create({id: 1, name: 'row 1'}),
-                Ember.Object.create({id: 2, name: 'row 2'}),
-                Ember.Object.create({id: 3, name: 'row 3'}),
-                Ember.Object.create({id: 4, name: 'row 4'}),
-                Ember.Object.create({id: 5, name: 'row 5'}),
-                Ember.Object.create({id: 6, name: 'row 6'}),
-                Ember.Object.create({id: 7, name: 'row 7'}),
-                Ember.Object.create({id: 8, name: 'row 8'}),
-                Ember.Object.create({id: 7, name: 'row 9'}),
-                Ember.Object.create({id: 7, name: 'row 10'}),
-                Ember.Object.create({id: 7, name: 'row 11'})
-            ]);
+        var ret = [];
+        for(i=0; i < 10000; i++) {
+            var obj = Ember.Object.create({id: i, name: 'row ' + i});
+            ret[i] = obj;
+        }
+        return(ret);
     },
 
     setupController: function(controller, model) {
